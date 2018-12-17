@@ -39,13 +39,17 @@
     </div>
     <script src="/node_modules/jquery/dist/jquery.js"></script>
     <script>
-        $('#signin_form').on('submit',function () {
+        $('#signin_form').on('submit',function (e) {
             var sel = $(this).serialize();
+                $.post('/signin',sel,function (data) {
+                   if(data.code == 2) {
+                       return alert(data.msg);
+                   }
 
-            $.post({"",sel,function (data) {
-                    console.log(data);
-                }
-            })
+                   alert(data.msg);
+
+                })
+                e.preventDefault();
         })
     </script>
 </body>
