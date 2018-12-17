@@ -2,15 +2,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = require('./router.js');
-
+const session = require('express-session');
 // 配置
 const app = express();
+
+
+// session配置
+    app.use(session({
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: true
+    }))
 
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
     extended: false
 }))
+
 
 // parse application/json
 app.use(bodyParser.json())

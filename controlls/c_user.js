@@ -1,15 +1,7 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysqlfunc = require('../modles/m_users');
 
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'news58'
-});
-
-connection.connect();
 
 // 追加页面
 exports.listadd = (req, res) => {
@@ -19,17 +11,9 @@ exports.listadd = (req, res) => {
 
 // 实现登录功能  接收用户的数据与数据库进行对比
 exports.listlogin = (req, res) => {
-
-
-
-
     const body = req.body;
-    console.log(body);
-    const sqlstr = 'SELECT *FROM `users` WHERE email=?';
 
-
-    connection.query(sqlstr, body.email, function (error, results) {
-        if (error) throw error;
+    mysqlfunc.getmysqlfunc(body.email, (error, results) => {
 
         if (results.length == 0) {
             return res.send({
@@ -46,13 +30,13 @@ exports.listlogin = (req, res) => {
             })
         }
 
-          res.send({
-                code: 3,
-                msg: '密码错误'
-            })
+        res.send({
+            code: 3,
+            msg: '密码错误'
+        })
 
     });
 }
 
 
-// connection.end();
+  

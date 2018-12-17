@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/public/css/login.css">
 </head>
 
+
 <body>
     <div class="main">
         <div class="header">
@@ -43,7 +44,7 @@
             var sel = $(this).serialize();
                 $.post('/signin',sel,function (data) {
                    if(data.code == 2) {
-                       return alert(data.msg);
+                     return window.location.href= '/';
                    }
 
                    alert(data.msg);
@@ -51,6 +52,9 @@
                 })
                 e.preventDefault();
         })
+
+
+
     </script>
 </body>
 
